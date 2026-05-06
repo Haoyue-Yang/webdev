@@ -20,7 +20,7 @@ __MACOSX/
 CLAUDE.md
 
 # verifier cache path
-assets/*
+verifier/assets/*
 
 # node.js modules
 node_modules/
