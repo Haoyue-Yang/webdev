@@ -1,0 +1,170 @@
+# Verifier Configuration
+
+api:
+  print_api_model: ${API_PRINT_API_MODEL||true}
+  prompt_caching: ${API_PROMPT_CACHING||false}
+  max_tokens: ${API_MAX_TOKENS||32768}
+  print_stream: ${API_PRINT_STREAM||false}
+
+  # Anthropic API settings
+  anthropic_api_key: ${ANTHROPIC_API_KEY||}
+  anthropic_base_url: ${ANTHROPIC_BASE_URL||}
+  claude_proxy: ${CLAUDE_PROXY||}
+
+  # OpenAI API settings
+  openai_api_key: ${OPENAI_API_KEY||}
+  openai_base_url: ${OPENAI_BASE_URL||}
+
+  default_api: ${DEFAULT_API||openai}
+  default_model: ${DEFAULT_MODEL||gemini-3-flash-preview}
+
+# Logging configuration
+log:
+  name: ${LOG_NAME||model_iteration}
+  dir: ${LOG_DIR||logs}
+  format: "{time:YYYY-MM-DD HH:mm:ss.SSS} | {level} | {name}:{function}:{line} | {message}"
+  datefmt: "%y/%m/%d %H:%M:%S"
+
+  console.level: ${LOG_CONSOLE_LEVEL||INFO}
+  file.level: ${LOG_FILE_LEVEL||INFO}
+  file.when: ${LOG_FILE_WHEN||midnight}
+  file.interval: ${LOG_FILE_INTERVAL||1}
+  file.backupCount: ${LOG_FILE_BACKUP_COUNT||7}
+
+  wf.level: ${LOG_WF_LEVEL||WARNING}
+  wf.when: ${LOG_WF_WHEN||midnight}
+  wf.interval: ${LOG_WF_INTERVAL||1}
+  wf.backupCount: ${LOG_WF_BACKUP_COUNT||7}
+
+  otel.enabled: ${LOG_OTEL_ENABLED||false}
+
+# Port range for randomly selecting a port for dev servers
+ports:
+  min: 20000
+  max: 65535
+
+# Server startup configuration
+server:
+  startup_timeout: ${SERVER_STARTUP_TIMEOUT||30}
+
+languages:
+  react:
+    install_script: "pnpm install"
+    start_script: "pnpm --ignore-workspace run dev --host --port {port} --no-open"
+    test_running_script: "curl --fail --silent --output /dev/null http://localhost:{port}"
+
+  html:
+    install_script: ""
+    start_script: "python3 -m http.server {port}"
+    test_running_script: "curl --fail --silent --output /dev/null http://localhost:{port}"
+
+  webdev_scaffold_2:
+    install_script: ""
+    start_script: ""
+    test_running_script: "curl --fail --silent --output /dev/null http://localhost:{port}"
+
+vlm:
+  default_model: "openai-vlm"
+  models:
+    openai-vlm:
+      model: "gemini-3-flash-preview"
+      api: "openai"
+      api_key: ${VLM_OPENAI_API_KEY||}
+      base_url: ${VLM_OPENAI_BASE_URL||}
+    claude-vlm:
+      model: "claude-sonnet-4-20250514-v1:0"
+      api: "anthropic"
+      api_key: ${VLM_CLAUDE_API_KEY||}
+      base_url: ${VLM_CLAUDE_BASE_URL||}
+
+evaluators:
+  return_usage: ${EVALUATOR_RETURN_USAGE||true}
+
+  # Combined aesthetics and functional evaluator
+  aesthetics_functional:
+    enabled: ${AESTHETICS_FUNCTIONAL_ENABLED||true}
+    use_full_chromium: ${USE_FULL_CHROMIUM||true}
+    axe_core_enabled: ${AESTHETICS_FUNCTIONAL_AXE_CORE_ENABLED||false}
+    pure_llm_scoring: ${PURE_LLM_SCORING||true}
+    skip_screenshot_take: ${SKIP_SCREENSHOT_TAKE||false}
+    runtime_logging_enabled: ${RUNTIME_LOGGING_ENABLED||true}
+    console_log_types: ${CONSOLE_LOG_TYPES||["error", "warning", "assert"]}
+    dev_server_ready_indicators: ${DEV_SERVER_READY_INDICATORS||["➜  press h + enter to show help", "ready in", "Local:", "ready at"]}
+    stream: ${AESTHETICS_FUNCTIONAL_STREAM||false}
+    model: "gemini-3-flash-preview"
+    api: "openai"
+    api_key: ${AESTHETICS_FUNCTIONAL_OPENAI_API_KEY||}
+    base_url: ${AESTHETICS_FUNCTIONAL_OPENAI_BASE_URL||}
+    prompt_version: ${PROMPT_VERSION||v3}
+    css_reset_check_enabled: ${CSS_RESET_CHECK_ENABLED||true}
+    screenshot_animation_wait_ms: ${SCREENSHOT_ANIMATION_WAIT_MS||2000}
+    screenshot_max_dimension: ${SCREENSHOT_MAX_DIMENSION||8000}
+
+  # Agent-TARS evaluator
+  agent_tars:
+    server_url: ${AGENT_TARS_SERVER_URL||http://localhost:8890}
+    use_streaming: ${AGENT_TARS_USE_STREAMING||true}
+
+    max_steps: ${AGENT_TARS_MAX_STEPS||25}
+    max_steps_grace: ${AGENT_TARS_MAX_STEPS_GRACE||5}
+    step_count_mode: ${AGENT_TARS_STEP_COUNT_MODE||tool_call}
+    timeout: ${AGENT_TARS_TIMEOUT||1800}
+    max_retries: ${AGENT_TARS_MAX_RETRIES||1}
+
+    log_show_timectl_pid_url: false
+    log_show_raw_tool_result: false
+    log_show_duplicate_thought: false
+    log_suppress_repeated_args_start: true
+
+    # serve startup params
+    local_repo: "./UI-TARS-desktop/multimodal"
+    serve_port: ${AGENT_TARS_SERVE_PORT||8890}
+    serve_host: ${AGENT_TARS_SERVE_HOST||127.0.0.1}
+    cdp_endpoint: ${AGENT_TARS_CDP_ENDPOINT||http://127.0.0.1:9225/json/version}
+    browser_control: ${AGENT_TARS_BROWSER_CONTROL||hybrid}
+    storage_dir: ${AGENT_TARS_STORAGE_DIR||}
+
+    page_pause_enabled: ${AGENT_PAUSE_ENABLED||true}
+    page_pause_wait_ms: ${AGENT_PAUSE_WAIT_MS||500}
+    press_duration_ms: ${AGENT_PRESS_DURATION_MS||30}
+
+    screencast_enabled: ${AGENT_RECORD_ENABLED||true}
+    screencast_fps: ${AGENT_RECORD_FPS||15}
+    screencast_quality: ${AGENT_RECORD_QUALITY||80}
+    screencast_output: ${AGENT_RECORD_OUTPUT||./tmp/recordings}
+    screencast_keep_frames: ${AGENT_RECORD_KEEP_FRAMES||false}
+    screencast_record_from_init: ${AGENT_RECORD_FROM_INIT||false}
+    screencast_strategy: ${AGENT_RECORD_STRATEGY||cdp_only}
+    llm_log_dir: ${AGENT_LLM_LOG_DIR||./tmp/llm_logs}
+
+    agent_prompt_path: ${AGENT_PROMPT_PATH||./verifier/prompts/agent_tars_scoring_v1.txt}
+
+    # interactive_video retry config
+    iv_static_max_retries: ${IV_STATIC_MAX_RETRIES||5}
+    iv_skip_initial_static: ${IV_SKIP_INITIAL_STATIC||false}
+    iv_planner_enabled: false
+    iv_planner_max_retries: 2
+    iv_planner_max_code_chars: 200000
+    iv_interaction_max_retries: ${IV_INTERACTION_MAX_RETRIES||2}
+    iv_detection_max_retries: ${IV_DETECTION_MAX_RETRIES||5}
+    iv_adjustment_max_retries: ${IV_ADJUSTMENT_MAX_RETRIES||5}
+
+    click_wait_ms: ${AGENT_CLICK_WAIT_MS||50}
+    navigate_wait_ms: ${AGENT_NAVIGATE_WAIT_MS||2000}
+
+    verbose_log: ${AGENT_VERBOSE_LOG||false}
+
+    tool_exclude: ${AGENT_TOOL_EXCLUDE||web_search,write_file,edit_file,create_directory,move_file,search_files,browser_click}
+
+    cdp_port: ${AGENT_CDP_PORT||9225}
+    close_tabs_on_finish: ${AGENT_CLOSE_TABS||true}
+
+    model:
+      provider: ${AGENT_TARS_MODEL_PROVIDER||volcengine}
+      base_url: ${AGENT_TARS_BASE_URL||}
+      api_key: ${AGENT_TARS_API_KEY||}
+      model_id: ${AGENT_TARS_MODEL||doubao-seed-2-0-lite-260215}
+
+    functional_score_floor: true
+
+browser_cache_path: ${BROWSER_CACHE_PATH||}

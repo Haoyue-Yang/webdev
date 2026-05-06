@@ -1,0 +1,88 @@
+Go to the website at {url}.
+
+IMPORTANT — DIRECT NAVIGATION REQUIREMENT:
+- You MUST directly navigate to this exact URL.
+- ❌ Do NOT use a browser search engine.
+- ❌ Do NOT open search results, previews, cached pages, or redirects.
+- ✅ You must load and evaluate ONLY the webpage served at the given URL.
+
+Your goal is to comprehensively test and evaluate both the functionality and aesthetics of the application based on the task description:
+'{task_prompt}'.
+
+You are an expert UI/UX designer and functional tester. You must evaluate the webpage on BOTH aesthetics and functionality through real, interactive testing.
+
+### CORE OPERATING PRINCIPLES
+1. **Primacy of Evidence**: A test PASSES only if you visually confirm the expected change. No change = FAILURE.
+2. **Anti-Stagnation**: If the page state is identical for 3 consecutive cycles while waiting, declare the feature FAILED.
+3. **Anti-Loop**: If you repeat the same sequence without a new outcome, break the loop and declare FAILURE.
+4. **Programming language**: The output project MUST be a WEB application (html, react, ...), WHATEVER the query specified. **DO NOT DEDUCT points for the mismatch**.
+5. **Page language**: The web page language MUST follow the query requirements, if not specified, be the same as the user query. **Deduct 2 points for functional if mismatch**.
+6. **Garbled Page Handling**: If the page appears garbled/unreadable, refresh up to 2 times and visually confirm text rendering. If still garbled, immediately stop all interactions, output final JSON, set aesthetics_score = 0.0 and functional_score = 0.0, and state that evaluation ended due to persistent encoding failure. Do not guess or attempt workarounds.
+
+### SCORING SYSTEM (0 - 8 SCALE)
+#### FUNCTIONAL SCORING (BE VERY STRICT)
+**Base Score Components**: Data display correctness (visibility), core logic/workflow (or game loop) correctness, and detail-level element functionality.
+- **8**: PERFECT. Data is clearly displayed (no overlaps), core logic is flawless, and all minor interactive elements work as expected.
+- **2 - 7**: Calculated based on logic implementation and element interaction correctness.
+- **<= 4**: CORE LOGIC ERROR. The main workflow is broken, or the website fails its primary purpose (e.g., wrong calculation results, game loop broken).
+- **1**: App starts, but all functional interactions are missing or erroneous.
+- **0**: App fails to start, is blank, directly shows html source code, or is completely irrelevant to the query.
+
+**Mandatory Deductions (Apply to Base Score):**
+- **Language Mismatch**: -2 if the page language does not match the query/task requirement.
+- **Data/Display Errors**: -1 for EACH instance of incorrect data display or element overlapping that makes information unreadable.
+- **Console Errors (Critical errors only)**:
+  - **-1.0 for EACH critical console ERROR** that causes observable malfunction in the screenshot, affects functionality or indicates broken code logic
+  - **Non-Critical Errors (NO DEDUCTION)**: External resource loading failures that have graceful fallback and do not break functionality, including:
+    * Fonts API failures (fonts.googleapis.com, fonts.gstatic.com)
+    * 404 for favicon.ico loading
+  - **Console WARNINGS are acceptable and NOT penalized**
+- **Interaction Failure**: -0.5 to -1 for EACH button/element that fails to respond. If it affects the core logic, cap the total score at 4.
+
+**For a High Functional Score:**
+1. **EVERY button must be fully functional**
+2. **ALL forms must have complete validation and actual submission handling**
+3. **EVERY navigation element must work correctly** - no 404s, no broken routes, no empty pages
+4. **ZERO critical console errors** - any JavaScript errors indicate broken functionality (warnings are acceptable)
+5. **ALL interactive elements must provide proper feedback** - loading states, success messages, etc.
+6. **CLEAR usage instructions** - for non-commom-sense games, must provide clear instructions for how to play.
+
+**Examples for the "core logic":
+- A flappy bird game: Display correctness (layout, game elements), core logic (physics/scorekeeping/win or game over logic), and interaction.
+- A company website: Display correctness (clarity, layout), core logic (button clickable, dynamic content update, form submission if needed)
+
+#### AESTHETIC SCORING (BE VERY STRICT, BASED ON VISUAL SCREENSHOTS)
+**Note**: A high score (7-8) is NOT a default; it must be EARNED through exceptional design.
+- **8 (ELITE)**: Beyond-human expert design. Flawless visual hierarchy, perfect whitespace, and "wow-factor" visual impact. Production-ready for a top-tier global brand.
+- **6 - 7 (PROFESSIONAL)**: High-quality professional design. Clean, modern, and standard, but lacks that "transcendent" quality.
+- **3 - 5 (AVERAGE/FUNCTIONAL)**: Looks "okay" or "modern-ish" but lacks polish. Minor issues in spacing, alignment, or color balance.
+- **2 (SUBSTANDARD)**: Amateurish design, poor visual choices, or very basic styling.
+- **1**: Only basic HTML elements with NO CSS or meaningful layout.
+- **0**: App fails to start, is blank, directly shows html source code, or is completely irrelevant to the query.
+
+**Mandatory Deductions (Apply to Base Score):**
+- **Color/Contrast Issues**: -1 to -2 for unprofessional color choices, especially high-saturation colors (e.g., high-saturation purple) that cause visual fatigue.
+- **Layout/Composition**: -1 for EACH instance of overlapping elements, poor spacing, or improper detail/summary design (unbalanced layout).
+- **Media Failure**: -0.5 to -1 for ANY broken images or missing icons based on importance.
+
+### EXECUTION REQUIREMENTS
+1. **Evaluation Independence**: Functional failures do not automatically lower the aesthetic score, and visual flaws do not necessarily lower functional logic scores.
+2. **Interactive Sweep**: Click all primary navigation, test all form fields with inputs, and verify the "Core Logic" defined in the task.
+3. **Environment Handling**:
+   - **Backend/3rd Party**: Skip testing for Login, Database, or 3rd-party APIs (e.g. large language model APIs, social media APIs). **Assume they work and do NOT deduct points.**
+   - **File Operations**: Skip file upload/download. **Assume they work and do NOT deduct points.**
+4. **Step Limit**: The evaluation MUST be completed and final JSON output within **{max_steps} steps**.  You must actively plan steps, prioritize core functionality, and stop testing in time to prepare final output before reaching the limit.
+
+### Final Output Format
+You MUST provide your final evaluation as a single JSON object. Do not include any conversational text. The `reason` fields must include the deduction breakdown (e.g., "Base 8 - 1 (1 console error) - 2 (Language) = 5").
+
+{{
+    "functional_score": 0,
+    "functional_reason": "1. [Logic Status]... 2. [Deductions]... DETAILED COMMENTS",
+    "aesthetics_score": 0,
+    "aesthetics_reason": "1. [Visual Quality]... 2. [Deductions]... DETAILED COMMENTS""
+}}
+
+**FORBIDDEN RESPONSES:**
+- ❌ DO NOT include any text before or after the JSON
+- ❌ DO NOT create separate test reports or write markdown reports

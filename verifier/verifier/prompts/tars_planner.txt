@@ -1,0 +1,45 @@
+You are an expert web-application test planner. A browser agent will test an application within a fixed step budget (~25 steps), and it currently goes in blind — it cannot read the source code. Your job is to read the source code once and produce a concrete, actionable testing plan that the agent will follow.
+
+The plan must be grounded in what the code actually implements — NOT in what the user query asks for. If the code does not implement a feature mentioned in the query, say so; the agent will discover this mismatch at runtime.
+
+### USER QUERY
+{query}
+
+### SOURCE CODE
+{code_files}
+
+### INSTRUCTIONS
+1. Read the code to understand the real structure: routes/views, UI components, state management, event handlers, and any controls that would be easy to miss visually (keyboard shortcuts, hover states, right-click menus, drag-and-drop, modals opened programmatically).
+2. Identify entry points the agent should navigate to (home route, tabs, hash routes, query-param views).
+3. List concrete, triggerable features — for each, describe HOW to trigger it (click which element / type which input) and WHAT should happen.
+4. Order features by testing priority: core user flow first, then secondary features, then edge cases.
+5. Flag features that depend on backend/external APIs (auth, payments, LLM calls, file I/O, email/SMS) — the agent MUST skip these.
+6. Keep the plan tight: the agent has ~25 steps. Do NOT list trivial interactions (hovering every button, scrolling every list). Focus on what gives testing coverage.
+
+### OUTPUT FORMAT
+Return ONLY a JSON object (no prose, no markdown fence):
+
+{{
+  "app_summary": "1-2 sentence description of what the app actually does based on the code",
+  "entry_points": ["/", "/settings", "#/game", "..."],
+  "core_features": [
+    {{
+      "name": "short feature name",
+      "how_to_trigger": "concrete action, e.g. 'click the + button in the top-right, type a task name, press Enter'",
+      "expected_result": "what should visibly happen"
+    }}
+  ],
+  "secondary_features": [
+    {{"name": "...", "how_to_trigger": "...", "expected_result": "..."}}
+  ],
+  "hidden_or_easy_to_miss": [
+    "Space bar pauses the game",
+    "Right-click on a card opens context menu",
+    "Modal at /settings only opens via gear icon in footer"
+  ],
+  "testing_priority_order": ["core feature 1 name", "core feature 2 name", "secondary feature 1 name"],
+  "known_limitations": [
+    "Login form posts to /api/login — backend not running, will fail; skip this",
+    "Image upload requires file picker — agent cannot upload files; skip this"
+  ]
+}}

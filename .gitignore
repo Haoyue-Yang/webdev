@@ -1,0 +1,56 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints
+__pypackages__/
+
+# python environment
+.env
+.venv
+env/
+venv/
+
+# system files
+__MACOSX/
+.DS_Store
+.cursor/
+.vscode/
+.claude/
+CLAUDE.md
+
+# verifier cache path
+assets/*
+
+# node.js modules
+node_modules/
+verifier/UI-TARS-desktop/multimodal/node_modules
+
+# temp files
+/tmp
+server_output.log
+
+# Runtime output directories
+browser_cache/
+output/
+verifier/workspace
+verifier/verifier/workspace
+
+# Local override files
+*.local
+
+# Agent-TARS test output
+verifier/UI-TARS-desktop/multimodal/tarko/agent/snapshot
+verifier/UI-TARS-desktop/multimodal/agent-tars/cli/images/
+verifier/UI-TARS-desktop/multimodal/agent-tars/cli/report.json
+verifier/UI-TARS-desktop/multimodal/agent-tars/cli/test_report*.md
+verifier/UI-TARS-desktop/multimodal/agent-tars/cli/*.html
+verifier/UI-TARS-desktop/multimodal/agent-tars/cli/*-game/
+verifier/UI-TARS-desktop/multimodal/agent-tars/cli/test_result.json
+
+# not necessary result files
+*.xlsx
+*.zip
+*.tar
+*.pdf
+verifier/verifier/docs
