@@ -64,8 +64,8 @@ COOKIE-Bench is an 11-domain, 54-leaf, 1,000-query WebDev benchmark spanning bot
 | **1. Install & Start** | Deploy generated code, start dev server, health check | Running web artifact |
 | **2. Static Evaluation** | Full-page screenshot, runtime logs, structural inventory | VLM-scored provisional priors |
 | **3. Agent-Driven Interaction** | COOKIE Agent explores via Observe→Think→Act loop with human-like clicks | Trajectory, keyframes, screencast, audio, problem summary |
-| **4. Score Adjustment** | Grade issues at Critical / Major / Minor severity across Functional and Aesthetic dimensions | Adjusted per-dimension scores with structured failure attribution |
-| **5. Overall Scoring** | Aggregate into final calibrated scores | Final functionality and aesthetics scores |
+| **4. Score Adjustment** | Grade issues at Critical / Major / Minor severity across Functional and Aesthetic dimensions | Adjusted functionality and aesthetics scores |
+| **5. Overall Scoring** | Aggregate into final calibrated scores | Final overall score |
 
 ### Evaluation Dimensions
 
@@ -181,11 +181,3 @@ Score ranges: installation (0/1), running (0/1), aesthetics (0–2), functional 
 We evaluate 13 frontier LLMs on COOKIE-Bench across functionality and aesthetics dimensions.
 
 ![Main Results](assets/main_results.png)
-
-## Citation
-
-If you find COOKIE or COOKIE-Bench useful, please cite:
-
-```bibtex
-
-```
