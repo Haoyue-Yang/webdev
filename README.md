@@ -12,7 +12,7 @@ This repository contains the  implementation of **COOKIE** — a reference-free,
 2. **Agent-Driven Interaction** — explores the application autonomously while capturing continuous screen video, audio, and per-step screenshots
 3. **Dynamic Scoring** — issues holistic functionality and aesthetics verdicts with structured failure attribution only after the evidence chain is complete
 
-![COOKIE Pipeline Overview](assets/intro.png)
+![COOKIE Pipeline Overview](assets/Intro.png)
 *Figure 1: Top: A "Super Mario" query flowing through deployment, autonomous agent-driven interaction, and multi-modal evidence capture. Bottom: Overall total Win rate for 13 frontier LLMs on COOKIE-Bench.*
 
 ### Interactive Video Demonstration
