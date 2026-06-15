@@ -1,10 +1,20 @@
-# Cookie-Bench: Continuous On-screen Key Interaction Evaluation for Web Generation
+<div align="center">
+  <h1>
+    <img src="assets/Cookie-Logo.png" alt="Cookie-Bench logo" width="72" align="center" />
+    Cookie-Bench
+  </h1>
+  <h3>Continuous On-screen Key Interaction Evaluation for Web Generation</h3>
 
-[![arXiv](https://img.shields.io/badge/arXiv-2605.30000-b31b1b.svg)](https://arxiv.org/pdf/2605.30000)
-[![Dataset: Hugging Face](https://img.shields.io/badge/Dataset-Hugging%20Face-yellow)](https://huggingface.co/datasets/Y36521478Y/Cookie-Bench)
-[![Dataset: ModelScope](https://img.shields.io/badge/Dataset-ModelScope-blue)](https://modelscope.cn/datasets/xiaoyangdemoonlake/Cookie-Bench)
+  <p>
+    <a href="https://arxiv.org/pdf/2605.30000"><img src="https://img.shields.io/badge/arXiv-2605.30000-b31b1b.svg" alt="arXiv" /></a>
+    <a href="https://huggingface.co/datasets/Y36521478Y/Cookie-Bench"><img src="https://img.shields.io/badge/Dataset-Hugging%20Face-yellow" alt="Hugging Face dataset" /></a>
+    <a href="https://modelscope.cn/datasets/xiaoyangdemoonlake/Cookie-Bench"><img src="https://img.shields.io/badge/Dataset-ModelScope-blue" alt="ModelScope dataset" /></a>
+  </p>
 
-Official repository for **Cookie-Bench: Continuous On-screen Key Interaction Evaluation for Web Generation**.
+  <p>
+    Official repository for <b>Cookie-Bench: Continuous On-screen Key Interaction Evaluation for Web Generation</b>.
+  </p>
+</div>
 
 Cookie-Bench studies how to evaluate modern LLM-generated web applications under realistic interactive use. Instead of relying on reference implementations, rigid checklists, or a single static screenshot, Cookie evaluates web artifacts through a live evidence chain: static perception, autonomous interaction, and holistic scoring.
 
@@ -24,21 +34,27 @@ Cookie is a reference-free evaluator grounded in metacognitive monitoring. It se
 2. **Agent-Driven Interaction:** autonomously explore the application while collecting screenshots, screen recordings, audio, logs, and interaction traces.
 3. **Dynamic Scoring:** synthesize all evidence into functionality and aesthetics judgments with structured failure attribution.
 
-![Cookie overview](assets/Intro.png)
+<p align="center">
+  <img src="assets/Intro.png" alt="Cookie overview" width="92%" />
+</p>
 
-*Figure 1. Cookie evaluates generated web applications through deployment, autonomous interaction, multimodal evidence collection, and holistic scoring. The benchmark compares frontier LLMs on Cookie-Bench.*
+<p align="center"><em>Figure 1. Cookie evaluates generated web applications through deployment, autonomous interaction, multimodal evidence collection, and holistic scoring. The benchmark compares frontier LLMs on Cookie-Bench.</em></p>
 
 ## Interactive Demonstration
 
 The following example shows Cookie evaluating an LLM-generated Super Mario web game through continuous on-screen interaction.
 
-![Cookie evaluating a Super Mario web game](assets/mario.gif)
+<p align="center">
+  <img src="assets/mario.gif" alt="Cookie evaluating a Super Mario web game" width="86%" />
+</p>
 
 ## Benchmark
 
 Cookie-Bench contains 1,000 prompts spanning a broad range of web generation scenarios, including content display, data reporting, marketing pages, tools, dashboards, games, and simulations.
 
-![Dataset construction](assets/data.png)
+<p align="center">
+  <img src="assets/data.png" alt="Dataset construction" width="92%" />
+</p>
 
 | Property | Description |
 | --- | --- |
@@ -58,7 +74,9 @@ The dataset is available from both:
 
 Cookie evaluates a generated web project in five operational stages.
 
-![Cookie evaluation pipeline](assets/eval_pipeline.png)
+<p align="center">
+  <img src="assets/eval_pipeline.png" alt="Cookie evaluation pipeline" width="92%" />
+</p>
 
 | Stage | Description | Output |
 | --- | --- | --- |
@@ -77,7 +95,9 @@ Cookie reports two main user-facing quality dimensions:
 
 Cookie-Bench evaluates 13 frontier LLMs across direct HTML generation and agent-scaffolded React generation settings. The results reveal substantial remaining headroom in interactive web generation, especially when models must maintain coherent behavior over a live session.
 
-![Main results](assets/main_results.png)
+<p align="center">
+  <img src="assets/main_results.png" alt="Main results" width="92%" />
+</p>
 
 For detailed experimental settings, human-alignment analysis, and ablations, please refer to the [paper](https://arxiv.org/pdf/2605.30000).
 
