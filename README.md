@@ -1,9 +1,7 @@
 <div align="center">
   <h1>
     <img src="assets/Cookie-Logo.png" alt="Cookie-Bench logo" width="72" align="center" />
-    Cookie-Bench
-  </h1>
-  <h3>Continuous On-screen Key Interaction Evaluation for Web Generation</h3>
+    Cookie-Bench: Continuous On-screen Key Interaction Evaluation for Web Generation
 
   <p>
     <a href="https://arxiv.org/pdf/2605.30000"><img src="https://img.shields.io/badge/arXiv-2605.30000-b31b1b.svg" alt="arXiv" /></a>
