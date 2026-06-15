@@ -58,7 +58,7 @@ The dataset is available from both:
 
 Cookie evaluates a generated web project in five operational stages.
 
-![Cookie evaluation pipeline](assets/eva..l_pipeline.png)
+![Cookie evaluation pipeline](assets/eval_pipeline.png)
 
 | Stage | Description | Output |
 | --- | --- | --- |
