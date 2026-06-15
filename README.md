@@ -9,9 +9,6 @@
     <a href="https://modelscope.cn/datasets/xiaoyangdemoonlake/Cookie-Bench"><img src="https://img.shields.io/badge/Dataset-ModelScope-blue" alt="ModelScope dataset" /></a>
   </p>
 
-  <p>
-    Official repository for <b>Cookie-Bench: Continuous On-screen Key Interaction Evaluation for Web Generation</b>.
-  </p>
 </div>
 
 Cookie-Bench studies how to evaluate modern LLM-generated web applications under realistic interactive use. Instead of relying on reference implementations, rigid checklists, or a single static screenshot, Cookie evaluates web artifacts through a live evidence chain: static perception, autonomous interaction, and holistic scoring.
